@@ -2,7 +2,6 @@ import unittest
 from unittest.mock import patch, MagicMock
 import json
 import urllib.error
-from solders.pubkey import Pubkey
 from .client import SolanaRPCClient
 from .rpc_mock import RPCMockTransport
 from .execptions import RPCError

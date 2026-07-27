@@ -3,6 +3,7 @@ from solders.pubkey import Pubkey
 from solders.keypair import Keypair
 from solders.message import Message
 from solders.transaction import Transaction
+from solders.hash import Hash
 from spl.token.instructions import (
     transfer_checked,
     TransferCheckedParams,
@@ -75,7 +76,11 @@ def send_token_transfer(
 
     # Modern Solana Transaction Building
     # 1. Get the latest blockhash from the network
-    recent_blockhash = client.get_latest_blockhash().value.blockhash
+    recent_blockhash_raw = client.get_latest_blockhash().value.blockhash
+    try:
+        recent_blockhash = Hash.from_string(str(recent_blockhash_raw))
+    except Exception:
+        recent_blockhash = recent_blockhash_raw
 
     # 2. Build the message with our instructions
     msg = Message(instructions, sender_pubkey)

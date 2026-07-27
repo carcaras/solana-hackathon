@@ -3,18 +3,52 @@ import random
 import time
 import urllib.request
 import urllib.error
-from typing import Optional, Dict, Any, Callable
+from typing import Optional, Dict, Any, Callable, Union
+from solders.pubkey import Pubkey
 from solinpy.client.entities import RPCConfig
 from solinpy.client.execptions import RPCError
+
+
+def _normalize_address(address: Union[str, Pubkey]) -> str:
+    """Converte Pubkey ou string para uma string limpa de endereço."""
+    return str(address).strip()
+
+
+def _json_safe(params: Any) -> Any:
+    """Converte parâmetros para formatos seguros para JSON (ex: Pubkey para string)."""
+    if isinstance(params, list):
+        return [_json_safe(p) for p in params]
+    if isinstance(params, dict):
+        return {k: _json_safe(v) for k, v in params.items()}
+    if isinstance(params, Pubkey):
+        return str(params)
+    if hasattr(params, "pubkey"):
+        return str(params.pubkey())
+    return params
+
+
+class BlockhashResult(str):
+    """Classe utilitária para manter compatibilidade com retorno de blockhash (str ou obj)."""
+
+    @property
+    def value(self) -> "BlockhashResult":
+        return self
+
+    @property
+    def blockhash(self) -> str:
+        return str(self)
 
 
 class SolanaRPCClient:
     def __init__(
         self,
-        config: Optional[RPCConfig] = None,
+        config: Optional[Union[RPCConfig, str]] = None,
         transport: Optional[Callable[..., Any]] = None,
     ):
-        self.cfg = config or RPCConfig()
+        if isinstance(config, str):
+            self.cfg = RPCConfig(custom_endpoint=config)
+        else:
+            self.cfg = config or RPCConfig()
         self.endpoint = self.cfg.custom_endpoint or self._resolve_cluster_url()
         self._request_id = 0
         self._transport = transport or urllib.request.urlopen
@@ -114,11 +148,27 @@ class SolanaRPCClient:
     def get_health(self) -> str:
         return self._call("getHealth")["result"]
 
-    def get_latest_blockhash(self, commitment: str = "confirmed") -> str:
+    def get_latest_blockhash(self, commitment: str = "confirmed") -> BlockhashResult:
         resp = self._call(
             "getLatestBlockhash", [{"commitment": commitment}], {"commitment": commitment}
         )
-        return resp["result"]["value"]["blockhash"]
+        return BlockhashResult(resp["result"]["value"]["blockhash"])
+
+    def get_account_info(self, address: Union[str, Pubkey], commitment: str = "confirmed") -> Any:
+        """Busca as informações básicas da conta (útil para verificar se existe)."""
+        sanitized_address = _normalize_address(address)
+        resp = self._call(
+            "getAccountInfo",
+            [sanitized_address, {"encoding": "base64", "commitment": commitment}],
+            {"address": sanitized_address, "commitment": commitment},
+        )
+        val = resp["result"]["value"]
+
+        class AccountInfoResult:
+            def __init__(self, value: Any):
+                self.value = value
+
+        return AccountInfoResult(val)
 
     def send_transaction(self, tx_base64: str, max_retries: int = 5) -> str:
         resp = self._call(
