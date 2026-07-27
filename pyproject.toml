@@ -1,6 +1,10 @@
 [project]
 name = "solinpy"
+<<<<<<< HEAD
 version = "0.1.7"
+=======
+version = "0.1.0"
+>>>>>>> c005121f8def40d9b200ca2ce6d4e4d58d019129
 description = "Python SDK for Solana"
 authors = [{ name = "SolPy Team" }]
 requires-python = ">=3.10"
@@ -12,6 +16,16 @@ dependencies = [
     "requests>=2.31.0"
 ]
 
+<<<<<<< HEAD
+=======
+dependencies = [
+	"solders==0.27.1",
+	"solana==0.36.11",
+	"spl",
+	"mnemonic==0.21",
+]
+
+>>>>>>> c005121f8def40d9b200ca2ce6d4e4d58d019129
 [tool.ruff]
 line-length = 100
 target-version = "py310"

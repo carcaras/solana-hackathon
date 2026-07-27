@@ -1,0 +1,1124 @@
+{
+    "conftest.py": [
+        {
+            "tipo": "Funcao",
+            "nome": "block_network_rpc_calls",
+            "argumentos": [
+                "monkeypatch",
+                "request"
+            ],
+            "docstring": "Prevent accidental real RPC network access in unit tests."
+        }
+    ],
+    "test_devnet_integration.py": [
+        {
+            "tipo": "Funcao",
+            "nome": "_client",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "_wait_for_signature_confirmation",
+            "argumentos": [
+                "client",
+                "signature",
+                "timeout",
+                "poll_interval"
+            ],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "_send_with_recent_blockhash",
+            "argumentos": [
+                "client",
+                "signer",
+                "receiver",
+                "lamports",
+                "attempts"
+            ],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "_wait_for_min_balance",
+            "argumentos": [
+                "client",
+                "wallet",
+                "expected_min_balance",
+                "timeout",
+                "poll_interval"
+            ],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "_fund_wallet",
+            "argumentos": [
+                "client",
+                "wallet",
+                "lamports"
+            ],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Classe",
+            "nome": "TestDevnetIntegration",
+            "docstring": "Sem documentação",
+            "metodos": [
+                {
+                    "metodo": "setUpClass",
+                    "argumentos": [
+                        "cls"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "_append_report",
+                    "argumentos": [
+                        "title",
+                        "lines"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_generate_wallet_returns_valid_keypair",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_devnet_airdrop_and_account_read",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_devnet_send_sol_between_wallets",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        }
+    ],
+    "test_wallet.py": [
+        {
+            "tipo": "Funcao",
+            "nome": "test_generate_keypair",
+            "argumentos": [],
+            "docstring": "Test if a valid keypair is generated."
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_import_from_json",
+            "argumentos": [
+                "tmp_path"
+            ],
+            "docstring": "Test importing a keypair from a generated JSON file."
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_import_from_json_file_not_found",
+            "argumentos": [],
+            "docstring": "Test if the proper error is raised when file is missing."
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_import_from_json_invalid_format",
+            "argumentos": [
+                "tmp_path"
+            ],
+            "docstring": "Test if ValueError is raised for non-list JSON."
+        }
+    ],
+    "test_airdrop.py": [
+        {
+            "tipo": "Classe",
+            "nome": "TestRequestAirdrop",
+            "docstring": "Testes para a função request_airdrop.",
+            "metodos": [
+                {
+                    "metodo": "test_create_airdrop_devnet_success",
+                    "argumentos": [],
+                    "docstring": "Testa solicitação via create_airdrop com sucesso."
+                },
+                {
+                    "metodo": "test_airdrop_devnet_success",
+                    "argumentos": [],
+                    "docstring": "Testa solicitação de airdrop na devnet com sucesso."
+                },
+                {
+                    "metodo": "test_airdrop_testnet_success",
+                    "argumentos": [],
+                    "docstring": "Testa solicitação de airdrop na testnet com sucesso."
+                },
+                {
+                    "metodo": "test_airdrop_invalid_cluster",
+                    "argumentos": [],
+                    "docstring": "Testa se ValueError é levantado para clusters inválidos."
+                },
+                {
+                    "metodo": "test_airdrop_custom_lamports",
+                    "argumentos": [],
+                    "docstring": "Testa solicitação de airdrop com quantidade customizada de lamports."
+                },
+                {
+                    "metodo": "test_airdrop_timeout_error",
+                    "argumentos": [],
+                    "docstring": "Testa se TimeoutError é levantado quando o airdrop não é confirmado."
+                },
+                {
+                    "metodo": "test_airdrop_polling_until_confirmed",
+                    "argumentos": [],
+                    "docstring": "Testa que a função faz polling até o airdrop ser confirmado."
+                }
+            ]
+        }
+    ],
+    "test_token_import.py": [
+        {
+            "tipo": "Funcao",
+            "nome": "test_token_transfer_module_imports",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        }
+    ],
+    "test_token.py": [
+        {
+            "tipo": "Funcao",
+            "nome": "test_get_associated_token_address_matches_program_derivation",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_send_token_transfer_creates_receiver_ata_when_missing",
+            "argumentos": [
+                "mock_get_ata",
+                "mock_create_ata",
+                "mock_transfer_checked",
+                "mock_message",
+                "mock_transaction"
+            ],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_send_token_transfer_skips_receiver_ata_creation_when_present",
+            "argumentos": [
+                "mock_get_ata",
+                "mock_create_ata",
+                "mock_transfer_checked",
+                "mock_message",
+                "mock_transaction"
+            ],
+            "docstring": "Sem documentação"
+        }
+    ],
+    "test_coverage_boost.py": [
+        {
+            "tipo": "Funcao",
+            "nome": "test_rpc_config_post_init_with_aliases",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_rpc_config_post_init_without_aliases",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_format_context_empty_and_filtered",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_friendly_rpc_message_variants",
+            "argumentos": [
+                "code",
+                "message",
+                "expected"
+            ],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_rpc_error_str_without_details",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_rpc_error_from_rpc_error_with_data",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_rpc_error_from_transport_default_message",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_client_retryable_rpc_code_path",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_client_retries_rpc_error_then_succeeds",
+            "argumentos": [
+                "mock_sleep"
+            ],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_client_missing_mock_response_fails_fast",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_client_balance_and_token_methods",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_client_sol_and_token_balances_helpers",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_mnemonic_import_from_mnemonic_success",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_mnemonic_import_validation_errors",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_derive_slip10_ed25519_path_validation_and_output",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_decode_spl_token_account_all_optional_fields",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "test_decode_account_data_fallback_paths",
+            "argumentos": [],
+            "docstring": "Sem documentação"
+        }
+    ],
+    "test_account_decoder.py": [
+        {
+            "tipo": "Classe",
+            "nome": "TestBase64Decoding",
+            "docstring": "Testes para funções de codificação/decodificação base64.",
+            "metodos": [
+                {
+                    "metodo": "test_decode_base64_to_bytes",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_decode_invalid_base64",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_encode_bytes_to_base64",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        },
+        {
+            "tipo": "Classe",
+            "nome": "TestByteParsing",
+            "docstring": "Testes para extração de dados de bytes.",
+            "metodos": [
+                {
+                    "metodo": "test_parse_pubkey",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_parse_pubkey_insufficient_bytes",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_parse_u64",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_parse_u64_big_endian",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_parse_u64_insufficient_bytes",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_parse_u32",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_parse_u32_insufficient_bytes",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_parse_u8",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_parse_u8_insufficient_bytes",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_parse_with_offset",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        },
+        {
+            "tipo": "Classe",
+            "nome": "TestSPLTokenDecoding",
+            "docstring": "Testes para desserialização de SPL Token.",
+            "metodos": [
+                {
+                    "metodo": "_create_token_account_data",
+                    "argumentos": [
+                        "amount",
+                        "state"
+                    ],
+                    "docstring": "Helper - cria dados SPL Token com tamanho suficiente para o decoder."
+                },
+                {
+                    "metodo": "test_decode_spl_token_account_basic",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_decode_spl_token_account_with_delegate",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_decode_spl_token_account_frozen",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_decode_spl_token_account_native",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_decode_spl_token_account_invalid_size",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "_create_token_mint_data",
+                    "argumentos": [
+                        "supply",
+                        "decimals",
+                        "is_initialized",
+                        "has_mint_authority",
+                        "has_freeze_authority"
+                    ],
+                    "docstring": "Helper para criar dados de mint SPL Token (82 bytes)."
+                },
+                {
+                    "metodo": "test_decode_spl_token_mint_basic",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_decode_spl_token_mint_with_authorities",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_decode_spl_token_mint_invalid_size",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        },
+        {
+            "tipo": "Classe",
+            "nome": "TestGenericAccountDecoding",
+            "docstring": "Testes para a função genérica decode_account_data.",
+            "metodos": [
+                {
+                    "metodo": "test_decode_dict_data",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_decode_string_data",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_decode_base64_string",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_auto_detect_spl_token",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_auto_detect_spl_token_mint",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_explicit_program_type",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_unknown_program_type",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        }
+    ],
+    "token.py": [
+        {
+            "tipo": "Funcao",
+            "nome": "get_associated_token_address",
+            "argumentos": [
+                "owner_address",
+                "token_mint_address"
+            ],
+            "docstring": "Derives the ATA (Associated Token Account) for the given wallet and mint."
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "send_token_transfer",
+            "argumentos": [
+                "client",
+                "sender_keypair",
+                "destination_wallet",
+                "token_mint",
+                "amount",
+                "decimals"
+            ],
+            "docstring": "Executes a complete SPL token transfer using the modern Solders architecture."
+        }
+    ],
+    "websocket.py": [
+        {
+            "tipo": "Classe",
+            "nome": "SolanaWebSocketClient",
+            "docstring": "Async WebSocket client for Solana JSON-RPC notifications.\n\nFeatures:\n- async context manager\n- subscribe_account(pubkey_str, callback)\n- subscribe_logs(mentioning_pubkey_str, callback)\n- automatic reconnect with exponential backoff",
+            "metodos": [
+                {
+                    "metodo": "__init__",
+                    "argumentos": [
+                        "endpoint",
+                        "cluster"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "_is_ws_open",
+                    "argumentos": [
+                        "ws"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "_next_id",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        }
+    ],
+    "test_client.py": [
+        {
+            "tipo": "Classe",
+            "nome": "TestSolanaRPCClient",
+            "docstring": "Sem documentação",
+            "metodos": [
+                {
+                    "metodo": "setUp",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "_mock_urlopen_response",
+                    "argumentos": [
+                        "data"
+                    ],
+                    "docstring": "Helper para criar um mock compatível com context manager"
+                },
+                {
+                    "metodo": "test_endpoint_resolution",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_get_health_success",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_get_latest_blockhash",
+                    "argumentos": [
+                        "mock_urlopen"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_retry_on_network_error",
+                    "argumentos": [
+                        "mock_urlopen"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_rpc_error_response",
+                    "argumentos": [
+                        "mock_urlopen"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_send_transaction_payload",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_get_transaction_history_payload_and_result",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        },
+        {
+            "tipo": "Classe",
+            "nome": "TestRPCRetryAndTimeout",
+            "docstring": "Sem documentação",
+            "metodos": [
+                {
+                    "metodo": "setUp",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "_mock_resp",
+                    "argumentos": [
+                        "data"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_retry_on_http_429",
+                    "argumentos": [
+                        "mock_sleep",
+                        "mock_urlopen"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_no_retry_on_fatal_rpc_error",
+                    "argumentos": [
+                        "mock_sleep",
+                        "mock_urlopen"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_retry_exhausted_on_network_error",
+                    "argumentos": [
+                        "mock_sleep",
+                        "mock_urlopen"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_timeout_applied_to_config",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_invalid_account_error_is_friendly",
+                    "argumentos": [
+                        "mock_urlopen"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "test_insufficient_funds_error_is_friendly",
+                    "argumentos": [
+                        "mock_urlopen"
+                    ],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        }
+    ],
+    "execptions.py": [
+        {
+            "tipo": "Funcao",
+            "nome": "_format_context",
+            "argumentos": [
+                "context"
+            ],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "_friendly_rpc_message",
+            "argumentos": [
+                "method",
+                "code",
+                "message"
+            ],
+            "docstring": "Sem documentação"
+        },
+        {
+            "tipo": "Classe",
+            "nome": "RPCError",
+            "docstring": "Erro de RPC com mensagem amigável e contexto estruturado.",
+            "metodos": [
+                {
+                    "metodo": "__init__",
+                    "argumentos": [
+                        "message"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "__str__",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "from_rpc_error",
+                    "argumentos": [
+                        "cls",
+                        "method",
+                        "rpc_error"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "from_transport_error",
+                    "argumentos": [
+                        "cls",
+                        "method",
+                        "error"
+                    ],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        }
+    ],
+    "client.py": [
+        {
+            "tipo": "Classe",
+            "nome": "SolanaRPCClient",
+            "docstring": "Sem documentação",
+            "metodos": [
+                {
+                    "metodo": "__init__",
+                    "argumentos": [
+                        "config",
+                        "transport"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "_resolve_cluster_url",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "_calc_backoff",
+                    "argumentos": [
+                        "attempt"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "_is_retryable",
+                    "argumentos": [
+                        "exc",
+                        "rpc_error"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "_raise_rpc_error",
+                    "argumentos": [
+                        "method",
+                        "rpc_error",
+                        "context"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "_call",
+                    "argumentos": [
+                        "method",
+                        "params",
+                        "context"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "get_health",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "get_latest_blockhash",
+                    "argumentos": [
+                        "commitment"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "send_transaction",
+                    "argumentos": [
+                        "tx_base64",
+                        "max_retries"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "get_balance",
+                    "argumentos": [
+                        "address"
+                    ],
+                    "docstring": "Returns the account balance in Lamports.\n\nArgs:\n    address: The base58-encoded public key of the account.\n\nReturns:\n    int: The balance in Lamports."
+                },
+                {
+                    "metodo": "get_token_accounts_by_owner",
+                    "argumentos": [
+                        "address"
+                    ],
+                    "docstring": "Returns the list of SPL token accounts associated with an address."
+                },
+                {
+                    "metodo": "get_sol_balance",
+                    "argumentos": [
+                        "address"
+                    ],
+                    "docstring": "Returns the account balance converted to SOL (user-friendly unit).\n\nArgs:\n    address: The base58-encoded public key of the account.\n\nReturns:\n    float: The balance in SOL."
+                },
+                {
+                    "metodo": "get_token_balances",
+                    "argumentos": [
+                        "address"
+                    ],
+                    "docstring": "Retrieves a simplified list of token balances for a given address."
+                },
+                {
+                    "metodo": "get_transaction_history",
+                    "argumentos": [
+                        "address",
+                        "limit",
+                        "before",
+                        "until",
+                        "commitment"
+                    ],
+                    "docstring": "List recent transaction signatures for a wallet address."
+                }
+            ]
+        }
+    ],
+    "rpc_mock.py": [
+        {
+            "tipo": "Classe",
+            "nome": "_MockHTTPResponse",
+            "docstring": "Sem documentação",
+            "metodos": [
+                {
+                    "metodo": "__init__",
+                    "argumentos": [
+                        "payload"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "read",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "__enter__",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "__exit__",
+                    "argumentos": [
+                        "exc_type",
+                        "exc",
+                        "tb"
+                    ],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        },
+        {
+            "tipo": "Classe",
+            "nome": "RPCMockTransport",
+            "docstring": "In-memory transport to simulate JSON-RPC responses in offline tests.",
+            "metodos": [
+                {
+                    "metodo": "__init__",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "queue_result",
+                    "argumentos": [
+                        "method",
+                        "result"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "queue_error",
+                    "argumentos": [
+                        "method",
+                        "code",
+                        "message",
+                        "data"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "queue_raw",
+                    "argumentos": [
+                        "method",
+                        "payload"
+                    ],
+                    "docstring": "Sem documentação"
+                },
+                {
+                    "metodo": "__call__",
+                    "argumentos": [
+                        "req",
+                        "timeout"
+                    ],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        }
+    ],
+    "entities.py": [
+        {
+            "tipo": "Classe",
+            "nome": "RPCConfig",
+            "docstring": "Configuração para o cliente RPC Solana.",
+            "metodos": [
+                {
+                    "metodo": "__post_init__",
+                    "argumentos": [],
+                    "docstring": "Sem documentação"
+                }
+            ]
+        },
+        {
+            "tipo": "Classe",
+            "nome": "TokenBalance",
+            "docstring": "Sem documentação",
+            "metodos": []
+        }
+    ],
+    "manager.py": [
+        {
+            "tipo": "Classe",
+            "nome": "WalletManager",
+            "docstring": "Utility class to handle Solana wallet operations.",
+            "metodos": [
+                {
+                    "metodo": "generate_keypair",
+                    "argumentos": [],
+                    "docstring": "Creates a new Solana keypair.\n\nReturns:\n    Keypair: A standard Solana keypair from the solders library."
+                },
+                {
+                    "metodo": "import_from_json",
+                    "argumentos": [
+                        "file_path"
+                    ],
+                    "docstring": "Loads a keypair from a standard Solana CLI JSON file.\n\nArgs:\n    file_path: Path to the .json file.\n\nReturns:\n    Keypair: The imported keypair object.\n\nRaises:\n    FileNotFoundError: If the file does not exist.\n    ValueError: If the JSON data is not a valid list of bytes."
+                }
+            ]
+        }
+    ],
+    "mnemonic.py": [
+        {
+            "tipo": "Funcao",
+            "nome": "import_from_mnemonic",
+            "argumentos": [
+                "mnemonic_str",
+                "passphrase",
+                "derivation_path"
+            ],
+            "docstring": "Reconstrói uma Keypair Solana a partir de uma seed phrase BIP39."
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "_derive_slip10_ed25519",
+            "argumentos": [
+                "seed",
+                "path"
+            ],
+            "docstring": "Derivação interna SLIP-0010 para Ed25519 (hardened only)."
+        }
+    ],
+    "account_decoder.py": [
+        {
+            "tipo": "Funcao",
+            "nome": "decode_base64_to_bytes",
+            "argumentos": [
+                "data"
+            ],
+            "docstring": "Decodifica string base64 para bytes.\n\nArgs:\n    data: String codificada em base64\n\nReturns:\n    Dados decodificados como bytes\n\nRaises:\n    ValueError: Se a string não for base64 válida"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "decode_bytes_to_base64",
+            "argumentos": [
+                "data"
+            ],
+            "docstring": "Codifica bytes para string base64.\n\nArgs:\n    data: Dados em bytes\n\nReturns:\n    String codificada em base64"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "parse_pubkey_from_bytes",
+            "argumentos": [
+                "data",
+                "offset"
+            ],
+            "docstring": "Extrai uma chave pública Solana de dados binários.\n\nArgs:\n    data: Dados binários contendo a chave pública\n    offset: Posição inicial da chave pública nos dados\n\nReturns:\n    Objeto Pubkey do solders\n\nRaises:\n    ValueError: Se não houver bytes suficientes"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "parse_u64_from_bytes",
+            "argumentos": [
+                "data",
+                "offset",
+                "little_endian"
+            ],
+            "docstring": "Extrai um inteiro de 64 bits de dados binários.\n\nArgs:\n    data: Dados binários contendo o inteiro\n    offset: Posição inicial nos dados\n    little_endian: Se True, usa little-endian (padrão Solana)\n\nReturns:\n    Inteiro de 64 bits\n\nRaises:\n    ValueError: Se não houver bytes suficientes"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "parse_u32_from_bytes",
+            "argumentos": [
+                "data",
+                "offset",
+                "little_endian"
+            ],
+            "docstring": "Extrai um inteiro de 32 bits de dados binários.\n\nArgs:\n    data: Dados binários contendo o inteiro\n    offset: Posição inicial nos dados\n    little_endian: Se True, usa little-endian (padrão Solana)\n\nReturns:\n    Inteiro de 32 bits\n\nRaises:\n    ValueError: Se não houver bytes suficientes"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "parse_u8_from_bytes",
+            "argumentos": [
+                "data",
+                "offset"
+            ],
+            "docstring": "Extrai um inteiro de 8 bits de dados binários.\n\nArgs:\n    data: Dados binários contendo o inteiro\n    offset: Posição inicial nos dados\n\nReturns:\n    Inteiro de 8 bits (0-255)\n\nRaises:\n    ValueError: Se não houver bytes suficientes"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "decode_system_account",
+            "argumentos": [
+                "data"
+            ],
+            "docstring": "Desserializa dados de uma conta do System Program.\n\nNota: Contas do System Program geralmente não possuem dados significativos.\nEsta função existe para compatibilidade futura.\n\nArgs:\n    data: Dados brutos da conta\n\nReturns:\n    Dicionário com campos estruturados"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "decode_spl_token_account",
+            "argumentos": [
+                "data"
+            ],
+            "docstring": "Desserializa dados de uma conta SPL Token (Token Account).\n\nEstrutura esperada (~165 bytes):\n- mint: Pubkey (32 bytes)\n- owner: Pubkey (32 bytes)\n- amount: u64 (8 bytes)\n- delegate: Option<Pubkey> (1 + 32 bytes)\n- state: u8 (1 byte)\n- is_native: Option<u64> (1 + 8 bytes)\n- delegated_amount: u64 (8 bytes)\n- close_authority: Option<Pubkey> (1 + 32 bytes)\n\nArgs:\n    data: Dados brutos da conta token (mínimo 72 bytes)\n\nReturns:\n    Dicionário com campos estruturados da conta token\n\nRaises:\n    ValueError: Se os dados não tiverem tamanho esperado"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "decode_spl_token_mint",
+            "argumentos": [
+                "data"
+            ],
+            "docstring": "Desserializa dados de uma conta Mint SPL Token.\n\nEstrutura esperada (82 bytes):\n- mint_authority: Option<Pubkey> (1 + 32 bytes)\n- supply: u64 (8 bytes)\n- decimals: u8 (1 byte)\n- is_initialized: bool (1 byte)\n- freeze_authority: Option<Pubkey> (1 + 32 bytes)\n\nArgs:\n    data: Dados brutos da conta mint (82 bytes)\n\nReturns:\n    Dicionário com informações do mint\n\nRaises:\n    ValueError: Se os dados não tiverem tamanho esperado"
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "decode_account_data",
+            "argumentos": [
+                "data",
+                "program_type"
+            ],
+            "docstring": "Função genérica para desserializar dados de conta.\n\nArgs:\n    data: Dados brutos da conta (bytes, string ou dict)\n    program_type: Tipo de programa para desserialização:\n        - \"auto\": Tenta detectar automaticamente\n        - \"spl_token\": SPL Token Account\n        - \"spl_token_mint\": SPL Token Mint\n        - \"system\": System Program\n        - \"raw\": Retorna dados brutos\n\nReturns:\n    Dicionário com dados estruturados\n\nRaises:\n    ValueError: Se o tipo de programa for desconhecido"
+        }
+    ],
+    "airdrop.py": [
+        {
+            "tipo": "Funcao",
+            "nome": "request_airdrop",
+            "argumentos": [
+                "keypair",
+                "cluster",
+                "lamports",
+                "timeout",
+                "poll_interval",
+                "custom_endpoint"
+            ],
+            "docstring": "Backward-compatible alias para create_airdrop.\n\nMantida para não quebrar código existente."
+        },
+        {
+            "tipo": "Funcao",
+            "nome": "create_airdrop",
+            "argumentos": [
+                "keypair",
+                "cluster",
+                "lamports",
+                "timeout",
+                "poll_interval",
+                "custom_endpoint"
+            ],
+            "docstring": "Solicita um airdrop de SOL para uma carteira em ambientes de teste (devnet ou testnet).\n\nEsta função envia a solicitação de airdrop e aguarda automaticamente\naté que a transação seja confirmada na rede.\n\nArgs:\n    keypair: O par de chaves da carteira que receberá o airdrop.\n    cluster: A rede onde solicitar o airdrop. Apenas 'devnet' ou 'testnet' são permitidos.\n    lamports: Quantidade de lamports a solicitar (1 SOL = 1_000_000_000 lamports).\n    timeout: Tempo máximo em segundos para aguardar a confirmação.\n    poll_interval: Intervalo em segundos entre cada verificação de confirmação.\n    custom_endpoint: URL customizada do RPC (opcional).\n\nReturns:\n    dict: Dicionário com as seguintes chaves:\n        - 'signature' (str): A assinatura da transação de airdrop.\n        - 'confirmed' (bool): Se o airdrop foi confirmado com sucesso.\n        - 'balance' (int): O saldo atual da conta após o airdrop (em lamports).\n\nRaises:\n    ValueError: Se o cluster não for 'devnet' ou 'testnet'.\n    RPCError: Se a solicitação ou confirmação do airdrop falhar.\n    TimeoutError: Se o tempo de espera pela confirmação exceder o timeout especificado.\n\nExample:\n    >>> from solders.keypair import Keypair\n    >>> from solinpy.utils import request_airdrop\n    >>> keypair = Keypair()\n    >>> result = request_airdrop(keypair, cluster=\"devnet\")\n    >>> print(result['signature'])\n    >>> print(result['confirmed'])"
+        }
+    ]
+}
