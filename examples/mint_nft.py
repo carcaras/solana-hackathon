@@ -2,7 +2,7 @@ from solders.system_program import create_account, CreateAccountParams
 from solders.message import Message
 from solders.transaction import Transaction
 from solders.hash import Hash
-from spl.token.instructions import (
+from solinpy.transaction.token import (
     initialize_mint,
     InitializeMintParams,
     mint_to,
