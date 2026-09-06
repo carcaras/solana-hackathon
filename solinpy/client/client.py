@@ -113,6 +113,8 @@ class SolanaRPCClient:
                         self._raise_rpc_error(method, err, context=context)
                     return body
 
+            except RPCError:
+                raise
             except urllib.error.HTTPError as e:
                 last_exc = e
                 if self._is_retryable(e) and attempt < self.cfg.max_retries:

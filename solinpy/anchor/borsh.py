@@ -20,6 +20,8 @@ def serialize(val: Any, type_def: Any, types_registry: Optional[Dict[str, Any]] 
         elif type_def == "u64":
             return struct.pack("<Q", val)
         elif type_def == "u128":
+            if not (0 <= val < (1 << 128)):
+                raise ValueError(f"Value out of range for u128: {val}")
             return struct.pack("<QQ", val & 0xFFFFFFFFFFFFFFFF, (val >> 64) & 0xFFFFFFFFFFFFFFFF)
         elif type_def == "i8":
             return struct.pack("<b", val)
@@ -30,6 +32,8 @@ def serialize(val: Any, type_def: Any, types_registry: Optional[Dict[str, Any]] 
         elif type_def == "i64":
             return struct.pack("<q", val)
         elif type_def == "i128":
+            if not (-(1 << 127) <= val < (1 << 127)):
+                raise ValueError(f"Value out of range for i128: {val}")
             unsigned_val = val if val >= 0 else (1 << 128) + val
             return struct.pack(
                 "<QQ", unsigned_val & 0xFFFFFFFFFFFFFFFF, (unsigned_val >> 64) & 0xFFFFFFFFFFFFFFFF
@@ -47,7 +51,13 @@ def serialize(val: Any, type_def: Any, types_registry: Optional[Dict[str, Any]] 
             encoded: bytes = val.encode("utf-8")
             return struct.pack("<I", len(encoded)) + encoded
         elif type_def == "bytes":
-            val_bytes = bytes.fromhex(val) if isinstance(val, str) else bytes(val)
+            if isinstance(val, str):
+                try:
+                    val_bytes = bytes.fromhex(val)
+                except ValueError as e:
+                    raise ValueError(f"Invalid hexadecimal value for type 'bytes': {val!r}") from e
+            else:
+                val_bytes = bytes(val)
             return struct.pack("<I", len(val_bytes)) + val_bytes
         else:
             raise ValueError(f"Tipo básico não suportado: {type_def}")
@@ -104,6 +114,11 @@ def serialize(val: Any, type_def: Any, types_registry: Optional[Dict[str, Any]] 
                     return struct.pack("<B", idx)
 
                 elif isinstance(val, dict):
+                    if len(val) != 1:
+                        raise ValueError(
+                            f"Enum variant dict must have exactly one key, "
+                            f"got {len(val)}: {list(val.keys())}"
+                        )
                     variant_name = list(val.keys())[0]
                     if variant_name not in variant_names:
                         raise ValueError(

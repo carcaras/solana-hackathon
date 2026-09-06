@@ -80,8 +80,8 @@ class InstructionCallable:
             account_metas.append(
                 AccountMeta(
                     pubkey=pubkey,
-                    is_signer=acc_def["isSigner"],
-                    is_writable=acc_def["isMut"],
+                    is_signer=acc_def.get("isSigner", acc_def.get("signer", False)),
+                    is_writable=acc_def.get("isMut", acc_def.get("writable", False)),
                 )
             )
 
@@ -175,7 +175,10 @@ class Program:
 
         self.types_registry: Dict[str, Any] = {}
         for type_def in idl.get("types", []):
-            self.types_registry[type_def["name"]] = type_def
+            type_name = type_def.get("name")
+            if not type_name:
+                raise ValueError(f"IDL type definition missing 'name' field: {type_def}")
+            self.types_registry[type_name] = type_def
 
         self.rpc = RPCNamespace(self, client, build_only=False)
         self.instruction = RPCNamespace(self, client, build_only=True)

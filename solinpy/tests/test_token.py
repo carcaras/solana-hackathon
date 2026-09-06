@@ -1,6 +1,7 @@
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
+from solders.hash import Hash
 from solders.keypair import Keypair
 from solders.pubkey import Pubkey
 
@@ -55,8 +56,9 @@ def test_send_token_transfer_creates_receiver_ata_when_missing(
 
     client = MagicMock()
     client.get_account_info.return_value = SimpleNamespace(value=None)
+    blockhash = "11111111111111111111111111111111"
     client.get_latest_blockhash.return_value = SimpleNamespace(
-        value=SimpleNamespace(blockhash="blockhash-1")
+        value=SimpleNamespace(blockhash=blockhash)
     )
     client.send_transaction.return_value = "tx-sig"
 
@@ -66,7 +68,7 @@ def test_send_token_transfer_creates_receiver_ata_when_missing(
     mock_create_ata.assert_called_once()
     mock_transfer_checked.assert_called_once()
     mock_message.assert_called_once_with(["create-ata-ix", "transfer-ix"], sender.pubkey())
-    mock_transaction.assert_called_once_with([sender], "message", "blockhash-1")
+    mock_transaction.assert_called_once_with([sender], "message", Hash.from_string(blockhash))
     client.send_transaction.assert_called_once_with("signed-tx")
 
     params = mock_transfer_checked.call_args.args[0]
@@ -102,8 +104,9 @@ def test_send_token_transfer_skips_receiver_ata_creation_when_present(
 
     client = MagicMock()
     client.get_account_info.return_value = SimpleNamespace(value=object())
+    blockhash = "SysvarRent111111111111111111111111111111111"
     client.get_latest_blockhash.return_value = SimpleNamespace(
-        value=SimpleNamespace(blockhash="blockhash-2")
+        value=SimpleNamespace(blockhash=blockhash)
     )
     client.send_transaction.return_value = "tx-sig-2"
 
@@ -113,5 +116,5 @@ def test_send_token_transfer_skips_receiver_ata_creation_when_present(
     mock_create_ata.assert_not_called()
     mock_transfer_checked.assert_called_once()
     mock_message.assert_called_once_with(["transfer-ix"], sender.pubkey())
-    mock_transaction.assert_called_once_with([sender], "message", "blockhash-2")
+    mock_transaction.assert_called_once_with([sender], "message", Hash.from_string(blockhash))
     client.send_transaction.assert_called_once_with("signed-tx")
