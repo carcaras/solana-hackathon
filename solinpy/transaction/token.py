@@ -72,6 +72,10 @@ class TransferCheckedParams:
 
 def transfer_checked(params: TransferCheckedParams) -> Instruction:
     """Cria uma instrução transfer_checked para tokens SPL."""
+    if not (0 <= params.amount < (1 << 64)):
+        raise ValueError(f"amount out of allowed range (u64): {params.amount}")
+    if not (0 <= params.decimals <= 255):
+        raise ValueError(f"decimals out of allowed range (u8): {params.decimals}")
     data = struct.pack("<BQB", 12, params.amount, params.decimals)
 
     return Instruction(
@@ -132,6 +136,8 @@ class MintToParams:
 
 def mint_to(params: MintToParams) -> Instruction:
     """Cria uma instrução mint_to para tokens SPL."""
+    if not (0 <= params.amount < (1 << 64)):
+        raise ValueError(f"amount out of allowed range (u64): {params.amount}")
     data = struct.pack("<BQ", 7, params.amount)
 
     return Instruction(
@@ -221,10 +227,7 @@ def send_token_transfer(
 
     # Construção de Transação Solana
     recent_blockhash_raw = client.get_latest_blockhash().value.blockhash
-    try:
-        recent_blockhash = Hash.from_string(str(recent_blockhash_raw))
-    except Exception:
-        recent_blockhash = recent_blockhash_raw
+    recent_blockhash = Hash.from_string(str(recent_blockhash_raw))
 
     msg = Message(instructions, sender_pubkey)
     tx = Transaction([sender_keypair], msg, recent_blockhash)
