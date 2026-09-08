@@ -45,7 +45,7 @@ source .venv/bin/activate
 
 2. Instale dependencias (se ainda nao instalou)
 
-pip install -r requirements.txt
+pip install -e ".[dev]"
 
 3. Rode todos os testes
 
