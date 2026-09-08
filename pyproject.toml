@@ -10,6 +10,14 @@ dependencies = [
     "httpx>=0.27.0"
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest==8.4.2",
+    "pytest-cov==7.0.0",
+    "mypy==1.20.0",
+    "ruff==0.15.10",
+]
+
 [tool.ruff]
 line-length = 100
 target-version = "py310"

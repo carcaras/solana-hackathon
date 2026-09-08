@@ -143,6 +143,7 @@ solinpy/
 The project tests use `pytest`, and the codebase is also checked with `ruff` and `mypy`.
 
 ```bash
+pip install -e ".[dev]"
 pytest
 python -m ruff check .
 python -m mypy solinpy
