@@ -24,6 +24,8 @@ nav:
     - RPC Client: api/client.md
     - Transactions: api/transactions.md
     - Wallet Management: api/wallet.md
+    - Anchor: api/anchor.md
+    - Utils: api/utils.md
   - Examples:
     - Token Transfer: examples/token_transfer.md
 
