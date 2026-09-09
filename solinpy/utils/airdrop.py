@@ -1,5 +1,5 @@
 import time
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from solders.keypair import Keypair
 
@@ -14,7 +14,7 @@ def request_airdrop(
     timeout: float = 60.0,
     poll_interval: float = 2.0,
     custom_endpoint: Optional[str] = None,
-) -> dict:
+) -> Dict[str, Any]:
     """
     Backward-compatible alias para create_airdrop.
 
@@ -37,7 +37,7 @@ def create_airdrop(
     timeout: float = 60.0,
     poll_interval: float = 2.0,
     custom_endpoint: Optional[str] = None,
-) -> dict:
+) -> Dict[str, Any]:
     """
     Solicita um airdrop de SOL para uma carteira em ambientes de teste (devnet ou testnet).
 

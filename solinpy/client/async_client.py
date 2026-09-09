@@ -37,7 +37,7 @@ class SolanaAsyncRPCClient:
         return urls.get(self.cfg.cluster, urls["devnet"])
 
     def _calc_backoff(self, attempt: int) -> float:
-        delay = min(self.cfg.base_delay * (2**attempt), self.cfg.max_delay)
+        delay = min(self.cfg.base_delay * (2.0**attempt), self.cfg.max_delay)
         jitter = random.uniform(0, delay * 0.5)
         return delay + jitter
 

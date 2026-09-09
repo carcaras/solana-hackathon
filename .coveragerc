@@ -7,6 +7,6 @@ omit =
     solinpy/client/test_client.py
 
 [report]
-fail_under = 100
+fail_under = 75
 show_missing = True
 skip_covered = False

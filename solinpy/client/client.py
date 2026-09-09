@@ -3,7 +3,7 @@ import random
 import time
 import urllib.request
 import urllib.error
-from typing import Optional, Dict, Any, Callable, Union
+from typing import Optional, Dict, Any, Callable, List, Union, cast
 from solders.pubkey import Pubkey
 from solinpy.client.entities import RPCConfig
 from solinpy.client.execptions import RPCError
@@ -62,11 +62,13 @@ class SolanaRPCClient:
         return urls.get(self.cfg.cluster, urls["devnet"])
 
     def _calc_backoff(self, attempt: int) -> float:
-        delay = min(self.cfg.base_delay * (2**attempt), self.cfg.max_delay)
+        delay = min(self.cfg.base_delay * (2.0**attempt), self.cfg.max_delay)
         jitter = random.uniform(0, delay * 0.5)
         return delay + jitter
 
-    def _is_retryable(self, exc: Optional[Exception], rpc_error: Optional[dict] = None) -> bool:
+    def _is_retryable(
+        self, exc: Optional[Exception], rpc_error: Optional[Dict[str, Any]] = None
+    ) -> bool:
         if isinstance(exc, urllib.error.HTTPError):
             return exc.code in self.cfg.retryable_http_codes
         if isinstance(exc, (urllib.error.URLError, ConnectionError, OSError, TimeoutError)):
@@ -76,14 +78,14 @@ class SolanaRPCClient:
         return False
 
     def _raise_rpc_error(
-        self, method: str, rpc_error: dict, context: Optional[Dict[str, Any]] = None
+        self, method: str, rpc_error: Dict[str, Any], context: Optional[Dict[str, Any]] = None
     ) -> None:
         raise RPCError.from_rpc_error(method, rpc_error, context=context)
 
     def _call(
         self,
         method: str,
-        params: Optional[list] = None,
+        params: Optional[List[Any]] = None,
         context: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         self._request_id += 1
@@ -103,7 +105,7 @@ class SolanaRPCClient:
         for attempt in range(self.cfg.max_retries + 1):
             try:
                 with self._transport(req, timeout=self.cfg.timeout) as resp:
-                    body = json.loads(resp.read())
+                    body: Dict[str, Any] = json.loads(resp.read())
                     if "error" in body:
                         err = body["error"]
                         if self._is_retryable(None, rpc_error=err):
@@ -146,7 +148,7 @@ class SolanaRPCClient:
         ) from last_exc
 
     def get_health(self) -> str:
-        return self._call("getHealth")["result"]
+        return str(self._call("getHealth")["result"])
 
     def get_latest_blockhash(self, commitment: str = "confirmed") -> BlockhashResult:
         resp = self._call(
@@ -176,7 +178,7 @@ class SolanaRPCClient:
             [tx_base64, {"encoding": "base64", "maxRetries": max_retries}],
             {"tx_size": len(tx_base64), "max_retries": max_retries},
         )
-        return resp["result"]
+        return str(resp["result"])
 
     def get_balance(self, address: str) -> int:
         """
@@ -190,15 +192,15 @@ class SolanaRPCClient:
         """
         sanitized_address = _normalize_address(address)
         resp = self._call("getBalance", [sanitized_address], {"address": sanitized_address})
-        return resp["result"]["value"]
+        return int(resp["result"]["value"])
 
-    def get_token_accounts_by_owner(self, address: str | Pubkey) -> list[Dict[str, Any]]:
+    def get_token_accounts_by_owner(self, address: Union[str, Pubkey]) -> List[Dict[str, Any]]:
         """
         Returns the list of SPL token accounts associated with an address.
         """
         TOKEN_PROGRAM_ID = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
 
-        sanitized_address = address.strip()
+        sanitized_address = _normalize_address(address)
 
         params = [
             sanitized_address,
@@ -207,7 +209,7 @@ class SolanaRPCClient:
         ]
 
         resp = self._call("getTokenAccountsByOwner", params, {"address": sanitized_address})
-        return resp["result"]["value"]
+        return cast(List[Dict[str, Any]], resp["result"]["value"])
 
     def get_sol_balance(self, address: str) -> float:
         """
@@ -223,7 +225,7 @@ class SolanaRPCClient:
         # 1 SOL is equivalent to 1,000,000,000 Lamports
         return lamports / 1_000_000_000
 
-    def get_token_balances(self, address: str) -> list[dict]:
+    def get_token_balances(self, address: str) -> List[Dict[str, Any]]:
         """
         Retrieves a simplified list of token balances for a given address.
         """
@@ -275,4 +277,4 @@ class SolanaRPCClient:
                 "commitment": commitment,
             },
         )
-        return resp["result"]
+        return cast(List[Dict[str, Any]], resp["result"])
