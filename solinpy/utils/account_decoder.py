@@ -86,7 +86,7 @@ def parse_u64_from_bytes(data: bytes, offset: int = 0, little_endian: bool = Tru
         )
 
     fmt = "<Q" if little_endian else ">Q"
-    return struct.unpack(fmt, data[offset : offset + 8])[0]
+    return int(struct.unpack(fmt, data[offset : offset + 8])[0])
 
 
 def parse_u32_from_bytes(data: bytes, offset: int = 0, little_endian: bool = True) -> int:
@@ -110,7 +110,7 @@ def parse_u32_from_bytes(data: bytes, offset: int = 0, little_endian: bool = Tru
         )
 
     fmt = "<I" if little_endian else ">I"
-    return struct.unpack(fmt, data[offset : offset + 4])[0]
+    return int(struct.unpack(fmt, data[offset : offset + 4])[0])
 
 
 def parse_u8_from_bytes(data: bytes, offset: int = 0) -> int:
